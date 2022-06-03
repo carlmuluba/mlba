@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load bulma_tags %}
+
+{% block content %}
+{% if submitted %}
+<div class="container">
+<p class="success">Your Resource was submitted successfully! </p>
+<div class="container">
+{% else %}
+<div class="container">
+<div class="columns">
+ <div class="column is-three-fifths is-offset-one-fifth">
+<form class="" action="" enctype="multipart/form-data" method="post" novalidate>
+   {% csrf_token %}
+   {{ form|bulma }}
+    {{ backend_form }}
+
+   <div class="field">
+     <button type="submit" class="button is-primary">Submit</button>
+   </div>
+   <input type="hidden" name="next" value="{{ next }}"/>
+
+</form>
+</div>
+</div>
+{% endif %}
+
+</div>
+
+{% endblock content %}

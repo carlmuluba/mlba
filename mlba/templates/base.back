@@ -1,0 +1,58 @@
+
+{% load static %}
+<html>
+<link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+<link href="https://fonts.googleapis.com/css?family=Pacifico&display=swap" rel="stylesheet">
+<!-- Compiled and minified CSS -->
+<!--link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"-->
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+<div class="row blue-grey darken-4 z-depth-3" id="head" >
+    <div class ="col s12 offset-s3  " id="sitetitle" >
+        <h1 class="white-text" id="title">MLB@</h1> </div>
+</div>
+
+    <nav class="row blue-grey darken-4 z-depth-5" style="margin-top: -20px">
+    <div class="nav-wrapper">
+    <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <li><a href="/">Home</a></li>
+    <li> <a href="/a00s/browse">Project A00s</a> </li>
+    <li> <a href="/videos/browse">Browse Videos</a> </li>
+    <li><a href="/a00s/create">Create a00s </a></li>
+    <li> <a href="/about">About</a></li>
+
+  {% if user.is_authenticated %}
+    <li>Hello, {{user.username}}.</li><li><a href="{% url 'logout' %}?next=/">Log out </a></li>
+   {% else %}
+    <li><a href="{% url 'login' %}?next=/">Login/Register</a></li>
+    {% endif %}
+
+
+
+    </ul>
+    </div>
+
+    </nav>
+
+<!--div class="slideshow">
+<img class="slide" src="{% static 'food1.jpeg'%}">
+<img class="slide" src="{% static 'food2.jpeg'%}">
+<img class="slide" src="{% static 'food3.jpeg'%}">
+<img class="slide" src="{% static 'food4.jpeg'%}">
+<img class="slide" src="{% static 'food5.jpeg'%}">
+
+</div-->
+
+{% block content %}
+{% endblock content %}
+
+
+<script src="https://code.jquery.com/jquery-3.4.1.js"
+  integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+  crossorigin="anonymous"></script>
+<!-- Compiled and minified JavaScript -->
+<!-- script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script-->
+<script type="text/javascript" src="{% static 'script.js' %}"></script>
+{% block additionalscript %}
+{% endblock additionalscript %}
+</html>

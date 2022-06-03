@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% load cloudinary %}
+{% block content %}
+<div class="container sitecontent">
+    <div class="has-text-right"><a href="{% url 'show-images' %}"><span class="delete" aria-label="close"></span></a></div>
+    <div class="is-size-3 has-text-centered is-uppercase"><h1>{{img.title}}</h1> </div>
+  <div class="card-image">
+    <figure class="image is-1by1">
+        {% cloudinary img.image format="jpg" width=1200 height=1200 crop="fill" %}
+    </figure>
+  </div>
+    <div class="content is-medium">
+        <h2>Description: </h2>
+        <p>{{img.desc}}</p>
+        <h4>Published on: </h4>
+        <p>{{img.pub_date}}</p>
+</div>
+</div>
+{% endblock content %}

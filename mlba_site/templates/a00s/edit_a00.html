@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load cloudinary %}
+{% load bulma_tags %}
+
+
+{% block content %}
+<div class="container">
+<div class="columns">
+ <div class="column is-three-fifths is-offset-one-fifth">
+     <div class="columns">
+  <div class="column">
+      {% if img_obj.cl_img %}
+    <figure class="image is-96x96">
+        {% cloudinary img_obj.cl_img format="jpg" width=96 height=96 crop="fill" %}
+    </figure>
+  </div>
+  <div class="column">
+      <a class="button is-danger" href="{ url 'delete-a00-img' img_obj.a00_tb.id }">Delete All</a>
+      {% else %}
+      <a class="button is-primary" href="{% url 'create-a00-img-request' img_obj %}">Add Image</a>
+      {% endif %}
+  </div>
+     </div>
+<form class="" action="" enctype="multipart/form-data" method="post" novalidate>
+        <!-- Security token by Django -->
+   {% csrf_token %}
+   {{ form|bulma }}
+    {{ backend_form }}
+
+        <!-- form as paragraph -->
+        <!-- { { form.as_p } } -->
+
+   <div class="field">
+     <button type="submit" class="button is-primary">Update</button>
+   </div>
+   <!--input type="hidden" name="next" value="next "/-->
+    </form>
+
+</div>
+</div>
+</div>
+{% endblock content %}

@@ -1,0 +1,210 @@
+{% load static bulma_tags %}
+{% load compress %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}MLB@ ::: is muluba ::::{% endblock title %}</title>
+  {% block css %}
+    {% font_awesome %}
+    <link rel="stylesheet" href="{% static 'bulma/css/style.min.css' %}">
+    <!--link rel="stylesheet" type="text/css" href="{% static 'style.scss' %}"-->
+    {% block extra_css %}{% endblock extra_css %}
+    {% compress css %}
+    <link type="text/x-scss" href="{% static 'style.scss' %}"     rel="stylesheet" media="screen">
+{% endcompress %}
+  {% endblock css %}
+</head>
+<body class="has-background-black-ter has-text-white-ter"><!-- style="background-image: url('{% static 'images/predio-PANO.jpg' %}'); no-repeat"-->
+{% load static %}
+  {% if request.path == '/' %}
+<video playsinline autoplay muted loop poster="/static/images/water.jpg">
+    <source src="/media/video/waterloop.mp4" type="video/mp4">
+    <source src="/media/video/waterloop.webm" type="video/webm">
+    Your browser does not support the video tag.
+  </video>
+  {% endif %}
+{% block header %}
+  <div class="container">
+    <nav class="navbar has-background-transparent" style="background: transparent;">
+      <div class="navbar-brand">
+        <a class="navbar-item" href="/">
+          <h2 class="is-size-1" style="color: #f5f5f5;">MLB@</h2>
+        </a>
+
+        <a class="navbar-item is-hidden-desktop" href="https://github.com/jgthms/bulma" target="_blank">
+        <span class="icon" style="color: #333;">
+          <i class="fab fa-github"></i>
+        </span>
+        </a>
+
+        <a class="navbar-item is-hidden-desktop" href="https://twitter.com/jgthms" target="_blank">
+        <span class="icon" style="color: #55acee;">
+          <i class="fab fa-twitter"></i>
+        </span>
+        </a>
+
+        <div class="navbar-burger burger" data-target="navMenuExample">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+
+
+      <div id="navMenuExample" class="navbar-menu">
+  {% if request.path == '/' %}
+          <div class="navbar-start">
+
+        <a class="navbar-item" href="https://instagram.com/c_muluba" target="_blank">
+        <span class="icon is-large" style="color: #f5f5f5;">
+          <i class="fab fa-instagram"></i>
+        </span>
+        </a>
+
+        <a class="navbar-item" href="https://twitter.com/muluba" target="_blank">
+        <span class="icon is-large" style="color: #55acee;">
+          <i class="fab fa-twitter"></i>
+        </span>
+        </a>
+        <a class="navbar-item" href="https://" target="_blank">
+        <span class="icon is-large" style="color: #55acee;">
+          <i class="fab fa-twitter"></i>
+        </span>
+        </a>
+          </div>
+            {% else %}
+        <div class="navbar-end">
+            <!-- ::: Movies :::: -->
+  {% if request.path == '/list_movies/' %}
+            <a class="navbar-item is-uppercase" href="">
+              Short Movies
+            </a>
+            {% else %}
+            <a class="navbar-item  is-active is-uppercase" href="/list_movies/">
+              Short Movies
+            </a>
+            {% endif %}
+            <!-- ::: A00s :::: -->
+  {% if request.path == '/list_a00s/' %}
+            <a class="navbar-item is-uppercase" href="">
+              A00s
+            </a>
+            {% else %}
+            <a class="navbar-item is-active is-uppercase" href="/list_a00s/">
+              A00s
+            </a>
+            {% endif %}
+            <!-- ::: Urban :::: -->
+  {% if request.path == '/list_urbans/' %}
+            <a class="navbar-item is-uppercase" href="">
+              Urban
+            </a>
+            {% else %}
+            <a class="navbar-item  is-active is-uppercase" href="/list_urbans/">
+              Urban
+            </a>
+            {% endif %}
+            <!-- ::: Resources :::: -->
+  {% if request.path == '/list_resources/' %}
+            <a class="navbar-item is-uppercase" href="">
+              Resources
+            </a>
+            {% else %}
+            <a class="navbar-item  is-active is-uppercase" href="/list_resources/">
+              Resources
+            </a>
+            {% endif %}
+            <!-- ::: Collectibles :::: -->
+  {% if request.path == '/collectibles' %}
+            <a class="navbar-item is-uppercase" href="">
+              Collectibles
+            </a>
+            {% else %}
+            <a class="navbar-item  is-active is-uppercase" href="/collectibles">
+              Collectibles
+            </a>
+            {% endif %}
+            <!-- ::: About :::: -->
+  {% if request.path == '/about' %}
+            <a class="navbar-item is-uppercase" href="">
+              About
+            </a>
+            {% else %}
+            <a class="navbar-item is-active is-uppercase" href="/about">
+              About
+            </a>
+            {% endif %}
+        <!--/div-->
+          <!--img src="http://bulma.io/images/bulma-logo.png" alt="Bulma: a modern CSS framework based on Flexbox"
+               width="112" height="28"-->
+
+        <!--div class="navbar-end"-->
+  {% if user.is_authenticated %}
+    <span class="navbar-item">Hello, {{user.username}}.</span><a class="navbar-item is-uppercase" href="{% url 'logout' %}?next=/">Log out </a>
+   {% else %}
+    <a class="navbar-item is-uppercase" href="{% url 'login' %}?next=/">Login/Register</a>
+    {% endif %}
+          <!-- {# url 'login' as login_url #}
+          {# if login_url #}
+           a class="navbar-item is-hidden-desktop-only" href="{{ login_url }}"
+              Login
+            </a-->
+        </div>
+          {% endif %}
+      </div>
+    </nav>
+  </div>
+{% endblock header %}
+
+{% block hero %}{% endblock hero %}
+
+<section class="section has-background-transparent has-text-white-ter">
+  <div class="container">
+    {% block messages %}
+      {% if messages %}
+        <div class="messages columns is-desktop">
+          <div class="column is-4 is-offset-4">
+            {% for message in messages %}
+              <div class="message {% if message.tags %}is-{{ message.tags|bulma_message_tag }}{% endif %}">
+                <div class="message-body">{{ message }}</div>
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+      {% endif %}
+    {% endblock messages %}
+
+    {% block content_area %}
+      {% block content_title %}{% endblock content_title %}
+      {% block content %}{% endblock content %}
+    {% endblock content_area %}
+  </div>
+</section>
+
+{% block modal %}{% endblock modal %}
+
+{% block footer %}
+  <footer class="footer has-background-black-ter has-text-white-ter">
+    <div class="container">
+      <div class="content has-text-centered">
+        <p>
+          <strong>MLB@</strong> is <a href="http://tutanus.com">muluba</a>. <strong>website</strong> developed by <a
+            href="">c muluba</a>. Art should be more important than creator. Browse nicely.
+        </p>
+        <p>
+          <a class="icon" href="https://github.com/jgthms/bulma">
+            <i class="fab fa-github"></i>
+          </a>
+        </p>
+      </div>
+    </div>
+  </footer>
+{% endblock footer %}
+
+{% block javascript %}
+  {% block extra_javascript %}{% endblock extra_javascript %}
+{% endblock javascript %}
+</body>
+</html>

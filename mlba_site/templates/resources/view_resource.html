@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% load cloudinary %}
+{% block content %}
+<div class="container sitecontent">
+    <div class="has-text-right"><a href="{% url 'list-resources' %}"><span class="delete" aria-label="close"></span></a></div>
+    <div class="is-size-3 has-text-centered is-uppercase"><h1>{{data.title}}</h1> </div>
+  <div class="card-image">
+    <figure class="image is-1by1">
+        <img src="https://ipfs.infura-ipfs.io/ipfs/{{data.url}}">
+    </figure>
+  </div>
+    <div class="content is-medium">
+        <h2>Description: </h2>
+        <p>{{data.desc}}</p>
+        <h4>Published on: </h4>
+        <p>{{data.pub_date}}</p>
+</div>
+</div>
+{% endblock content %}

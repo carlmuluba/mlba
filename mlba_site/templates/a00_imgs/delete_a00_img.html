@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load bulma_tags %}
+{% load cloudinary %}
+
+{% block content %}
+{% if submitted %}
+<div class="container">
+<p class="success">Your Image was submitted successfully! </p>
+<div class="container">
+{% else %}
+<div class="container">
+<div class="columns">
+ <div class="column is-three-fifths is-offset-one-fifth">
+
+    <figure class="image is-96x96">
+      <img id="img">
+    </figure>
+<form class="" action="" enctype="multipart/form-data" method="post" novalidate>
+   {% csrf_token %}
+   {{ form|bulma }}
+    {{ backend_form }}
+
+   <div class="field">
+     <button type="delete" class="button is-primary">Delete</button>
+   </div>
+   <input type="hidden" name="next" value="{{ next }}"/>
+
+</form>
+</div>
+</div>
+{% endif %}
+
+</div>
+
+{% endblock content %}

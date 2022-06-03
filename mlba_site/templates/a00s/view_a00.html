@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% load cloudinary %}
+{% block content %}
+<div class="container sitecontent">
+    <div class="has-text-right"><a href="{% url 'list-a00s' %}"><span class="delete" aria-label="close"></span></a></div>
+    <div class="is-size-3 has-text-centered is-uppercase"><h1>{{a00_data.title}}</h1> </div>
+      {% if img != '' %}
+  <div class="card-image">
+    <figure class="image is-1by1">
+        {% cloudinary img.cl_img format="jpg" width=1200 height=1200 crop="fill" %}
+    </figure>
+  </div>
+    {% endif %}
+    <div class="content is-medium">
+        <h2>Description: </h2>
+        <p>{{a00_data.desc}}</p>
+        <h4>Published on: </h4>
+        <p>{{a00_data.pub_date}}</p>
+</div>
+</div>
+{% endblock content %}

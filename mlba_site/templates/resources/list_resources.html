@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="row">
+        <p class="is-size-2 has-text-centered is-uppercase">Resources </p>
+        <!-- loop through all the images -->
+        <div class="columns is-multiline is-mobile">
+        {% for pic in all_resources %}
+            <div class="column is-one-quarter">
+        <div class="card has-background-black-ter has-text-white-ter">
+  <div class="card-image" style="overflow: hidden;background: #f1f1f1">
+    <a class="image is-1by1" href="{% url 'view-resource-request' pic.id %}">
+          <img src="https://ipfs.infura-ipfs.io/ipfs/{{ pic.url }}" >
+  <!--img src="{{ pic.url }}"-->
+    </a>
+  </div>
+            <!--div class="card-content">
+      <div class="media-content">
+        <p class="title is-4">{{pic.title}}</p>
+      </div>
+    </div-->
+
+</div>
+            </div>
+        {% endfor %}
+        </div>
+    </div>
+{% endblock content %}

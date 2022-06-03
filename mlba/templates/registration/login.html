@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load bulma_tags %}
+{%block content %}
+
+<div class="container">
+<div class="columns">
+ <div class="column is-three-fifths is-offset-one-fifth">
+        <p class="is-size-2 has-text-centered is-uppercase">Login </p>
+<p> You must be logged in to submit content </p>
+<form method="post" action ="{% url 'login' %}">
+<!--input type="submit" value="login"-->
+
+   {% csrf_token %}
+   {{ form|bulma }}
+    {{ backend_form }}
+
+   <div class="field">
+     <button type="submit" class="button is-primary">Login</button>
+   </div>
+<p> Not registered yet? <a href ="/register/">Register </a> </p>
+<input type= "hidden" name="next" value ="{{next}}" />
+{%csrf_token%}
+</form>
+
+</div>
+</div>
+</div>
+{%endblock content%}
+

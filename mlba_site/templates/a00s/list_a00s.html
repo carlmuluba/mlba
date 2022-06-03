@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load cloudinary %}
+{% block content %}
+    <div class="row"><!-- #{ { request.path } } -->
+        <p class="is-size-2 has-text-centered is-uppercase">a00s </p>
+        <!-- loop through all the images -->
+        <div class="columns is-multiline is-mobile">
+        {% for pic in all_a00s %}
+            <div class="column is-one-quarter">
+        <div class="card has-background-black-ter has-text-white-ter">
+  <div class="card-image">
+    <a class="image is-1by1" href="{% url 'view-a00-request' pic.a00_tb.id %}">
+        {% cloudinary pic.cl_img format="jpg" width=900 height=900 crop="fill" %}
+    </a>
+  </div>
+            <!--div class="card-content">
+      <div class="media-content">
+        <p class="title is-4">{{pic.title}}</p>
+      </div>
+    </div-->
+
+</div>
+            </div>
+        {% endfor %}
+        </div>
+    </div>
+{% endblock content %}

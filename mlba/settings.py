@@ -14,6 +14,7 @@ import os
 import dj_database_url
 import cloudinary.api
 
+import dj_database_url
 # adding config
 
 
@@ -34,6 +35,8 @@ SECRET_KEY = 'django-insecure-^r)eei^rj4_mh3^)oxb^7if&!_poymld0z2o6ux@r%lp0q5uzv
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True  # False
+
+CSRF_TRUSTED_ORIGINS = ['https://']
 
 ALLOWED_HOSTS = [
     '*'
@@ -167,7 +170,6 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'mlba/media')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Heroku: Update database configuration from $DATABASE_URL.
-import dj_database_url
 db_from_env = dj_database_url.config(conn_max_age=500)
 DATABASES['default'].update(db_from_env)
 # Simplified static file serving.

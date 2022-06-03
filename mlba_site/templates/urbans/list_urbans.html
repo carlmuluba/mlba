@@ -4,9 +4,9 @@
     <div class="row">
         <p class="is-size-2 has-text-centered is-uppercase">Urban Art </p>
         <!-- loop through all the images -->
-        <div class="columns is-multiline is-mobile">
+        <div class="columns is-multiline is-desktop">
         {% for pic in all_urbans %}
-            <div class="column is-one-quarter">
+            <div class="column is-3">
         <div class="card has-background-black-ter has-text-white-ter">
   <div class="card-image">
     <a class="image is-1by1" href="{% url 'view-urban-request' pic.urban_tb_id %}">

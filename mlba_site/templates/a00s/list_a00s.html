@@ -4,9 +4,9 @@
     <div class="row"><!-- #{ { request.path } } -->
         <p class="is-size-2 has-text-centered is-uppercase">a00s </p>
         <!-- loop through all the images -->
-        <div class="columns is-multiline is-mobile">
+        <div class="columns is-multiline is-desktop">
         {% for pic in all_a00s %}
-            <div class="column is-one-quarter">
+            <div class="column is-3">
         <div class="card has-background-black-ter has-text-white-ter">
   <div class="card-image">
     <a class="image is-1by1" href="{% url 'view-a00-request' pic.a00_tb.id %}">

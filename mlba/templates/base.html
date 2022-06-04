@@ -37,11 +37,6 @@
           <i class="fab fa-twitter"></i>
         </span>
         </a>
-        <!--a class="navbar-item" href="https://facebook.com/MLBa" target="_blank">
-        <span class="icon is-large" style="color: #55acee;">
-          <i class="fab fa-facebook"></i>
-        </span>
-        </a-->
 
         <a class="navbar-item" href="https://instagram.com/c_muluba" target="_blank">
         <span class="icon is-large" style="color: #f5f5f5;">
@@ -51,13 +46,14 @@
             {% endif %}
 
   {% if request.path != '/' %}
-        <div class="navbar-burger" data-target="navMenuExample">
+        <a role="button" class="navbar-burger" data-target="navMenuExample">
           <span></span>
           <span></span>
           <span></span>
-        </div>
+        </a>
+            {% endif %}
       </div>
-
+  {% if request.path != '/' %}
       <div id="navMenuExample" class="navbar-menu is-transparent">
           <div class="navbar-start">
 
@@ -123,25 +119,18 @@
             {% endif %}
           </div>
         <div class="navbar-end">
-        <!--/div-->
-          <!--img src="http://bulma.io/images/bulma-logo.png" alt="Bulma: a modern CSS framework based on Flexbox"
-               width="112" height="28"-->
+            <!--
 
-        <!--div class="navbar-end"-->
-  {% if user.is_authenticated %}
+  { if user.is_authenticated }
     <span class="navbar-item">Hello, {{user.username}}.</span><a class="navbar-item is-uppercase" href="{% url 'logout' %}?next=/">Log out </a>
-   {% else %}
+   { else }
     <a class="navbar-item is-uppercase" href="{% url 'login' %}?next=/">Login/Register</a>
-    {% endif %}
-          <!-- {# url 'login' as login_url #}
-          {# if login_url #}
-           a class="navbar-item is-hidden-desktop-only" href="{{ login_url }}"
-              Login
-            </a-->
-        </div>
+    { endif }
+
+        </div-->
+      </div>
+      </div>
           {% endif %}
-      </div>
-      </div>
   </nav>
   <!--/div-->
 {% endblock header %}
@@ -178,8 +167,8 @@
     <div class="container">
       <div class="content has-text-centered">
         <p>
-          <strong>MLB@</strong> is <a href="/">c muluba</a>. <strong>website</strong> developed by <a
-            href="https://www.tutanus.com">cadasilva</a>. "the creator should be less important than his work". Browse nicely.
+          <strong>MLB@</strong> is <a href="/">c muluba</a>. <strong>website</strong> developed by <strong><a
+            href="https://www.tutanus.com">cadasilva</a></strong>. "the creator should be less important than his work". Browse nicely.
         </p>
         <!--p>
           <a class="icon" href="https://github.com/jgthms/bulma">

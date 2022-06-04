@@ -1,0 +1,67 @@
+/* line 2, mlba/static/style.scss */
+.ipfs_img {
+  min-width: 200%;
+  /* center image */
+  margin-left: -50%;
+  margin-top: -50%;
+  height: auto; }
+
+/* line 9, mlba/static/style.scss */
+.navbar-menu {
+  background-color: #242424 !important; }
+
+/* line 12, mlba/static/style.scss */
+.is-size-1-desktop {
+  font-size: 4rem !important; }
+
+/* line 15, mlba/static/style.scss */
+.label {
+  color: #fafafa; }
+
+/* line 18, mlba/static/style.scss */
+.content a {
+  color: #f5f5f5; }
+
+/* Bulma uses SASS mixins for creating CSS outputs */
+/* line 34, mlba/static/style.scss */
+.loader-mixin {
+  animation: spinAround .5s infinite linear;
+  border: 2px solid #f1f1f1;
+  border-radius: 9999px;
+  border-right-color: transparent;
+  border-top-color: transparent;
+  display: block;
+  height: 1em;
+  position: relative;
+  width: 1em; }
+
+/* line 39, mlba/static/style.scss */
+video {
+  object-fit: cover;
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0; }
+
+/* line 47, mlba/static/style.scss */
+.video-wrapper {
+  border: 2px solid #000;
+  min-width: 100%;
+  min-height: 100%;
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center; }
+
+@media screen and (min-width: 1024px) {
+  /* line 60, mlba/static/style.scss */
+  .navbar-link.is-active, a.navbar-item.is-active {
+    color: #fafafa; } }
+
+/* line 65, mlba/static/style.scss */
+.navbar-link.is-active, .navbar-link:focus, .navbar-link:focus-within, .navbar-link:hover, a.navbar-item.is-active, a.navbar-item:focus, a.navbar-item:focus-within, a.navbar-item:hover {
+  background-color: transparent;
+  color: #fafafa; }

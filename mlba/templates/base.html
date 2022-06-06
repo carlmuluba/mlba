@@ -27,10 +27,11 @@
 {% block header %}
   <!--div class="container"-->
     <nav class="navbar  is-transparent" style="background: transparent;">
-      <div class="navbar-brand">
-        <a class="navbar-item" href="/">
-          <h2 class="is-size-1" style="color: #f5f5f5;">MLB@</h2>
-        </a>
+      <div class="navbar-brand" style="height: 39px; padding-top: 1.5rem;">
+          <!--h2 class="is-size-1" style="color: #f5f5f5;">MLB@</h2-->
+    <a class="" href="/" style="height: 80px; width: 160px; padding-left: 1.5rem;">
+      <img src="/static/images/MLBa-logo.png" width="125" height="">
+    </a>
   {% if request.path == '/' %}
         <a class="navbar-item" href="https://twitter.com/muluba" target="_blank">
         <span class="icon is-large" style="color: #55acee;">
@@ -54,7 +55,7 @@
             {% endif %}
       </div>
   {% if request.path != '/' %}
-      <div id="navMenuExample" class="navbar-menu is-transparent">
+      <div id="navMenuExample" class="navbar-menu is-transparent" style="padding-top: 1.5rem;">
           <div class="navbar-start">
 
             <!-- ::: Movies :::: -->

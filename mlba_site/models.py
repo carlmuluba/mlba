@@ -63,6 +63,18 @@ class UrbanImage(models.Model):
         return self.cl_img
 
 
+class UrbanImgMultiple(models.Model):
+    class Meta:
+        db_table = 'urban_img_multiple'
+
+    urban_image_tb = models.ForeignKey('UrbanImage', related_name='urban_image_tb', on_delete=models.CASCADE)
+    cl_img_multiple = CloudinaryField('image', folder="mlba_img/urbans/multiple", )
+    pub_date = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.cl_img
+
+
 class Resource(models.Model):
     class Meta:
         db_table = 'resource'

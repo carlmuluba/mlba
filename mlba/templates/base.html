@@ -11,11 +11,22 @@
     <link rel="stylesheet" href="{% static 'bulma/css/style.min.css' %}">
     {% block extra_css %}{% endblock extra_css %}
     {% compress css %}
-    <link type="text/x-scss" href="{% static 'style.scss' %}"     rel="stylesheet" media="screen">
+    <link type="text/x-scss" href="{% static 'style.scss' %}"  rel="stylesheet" media="screen">
 {% endcompress %}
   {% endblock css %}
 </head>
-<body class="has-background-black-ter has-text-white-ter"><!-- style="background-image: url('{% static 'images/predio-PANO.jpg' %}'); no-repeat"-->
+
+<body class="has-background-black-ter has-text-white-ter" >
+  {% if request.path == '/list_urbans/' or request.path|truncatechars:12|safe == '/view_urban…' %}
+  <div class="bg_overlay" style="background-image: url('{% static 'images/bg_urban.jpg' %}')">
+  </div>
+  {% endif %}
+
+  {% if request.path == '/list_a00s/' or request.path|truncatechars:8|safe == '/view_a…' %}
+  <div class="bg_overlay" style="background-image: url('{% static 'images/bg_urban.jpg' %}')">
+  </div>
+  {% endif %}
+
 {% load static %}
   {% if request.path == '/' %}
 <video playsinline autoplay muted loop poster="/static/images/water.jpg">
@@ -55,9 +66,21 @@
             {% endif %}
       </div>
   {% if request.path != '/' %}
-      <div id="navMenuExample" class="navbar-menu is-transparent" style="padding-top: 1.5rem;">
+      <div id="navMenuExample" class="navbar-menu is-transparent" style="padding-top: 1.5rem;background-color: transparent !important;">
           <div class="navbar-start">
 
+          </div>
+        <div class="navbar-end">
+            <!--
+
+  { if user.is_authenticated }
+    <span class="navbar-item">Hello, {{user.username}}.</span><a class="navbar-item is-uppercase" href="{% url 'logout' %}?next=/">Log out </a>
+   { else }
+    <a class="navbar-item is-uppercase" href="{% url 'login' %}?next=/">Login/Register</a>
+    { endif }
+
+        </div>
+      </div-->
             <!-- ::: Movies :::: -->
   {% if request.path == '/list_movies/' %}
             <a class="navbar-item is-uppercase">
@@ -69,7 +92,7 @@
             </a>
             {% endif %}
             <!-- ::: A00s :::: -->
-  {% if request.path == '/list_a00s/' %}
+  {% if request.path == '/list_a00s/' or request.path|truncatechars:8|safe == '/view_a…' %}
             <a class="navbar-item is-uppercase">
               A00s
             </a>
@@ -79,7 +102,7 @@
             </a>
             {% endif %}
             <!-- ::: Urban :::: -->
-  {% if request.path == '/list_urbans/' %}
+  {% if request.path == '/list_urbans/' or request.path|truncatechars:12|safe == '/view_urban…' %}
             <a class="navbar-item is-uppercase">
               Urban
             </a>
@@ -88,6 +111,7 @@
               Urban
             </a>
             {% endif %}
+
             <!-- ::: Resources :::: -->
   {% if request.path == '/list_resources/' %}
             <a class="navbar-item is-uppercase">
@@ -104,7 +128,7 @@
               Collectibles
             </a>
             {% else %}
-            <a class="navbar-item  is-active is-uppercase" href="/collectibles">
+            <a class="navbar-item  is-active is-uppercase" href="">
               Collectibles
             </a>
             {% endif %}
@@ -119,17 +143,6 @@
             </a>
             {% endif %}
           </div>
-        <div class="navbar-end">
-            <!--
-
-  { if user.is_authenticated }
-    <span class="navbar-item">Hello, {{user.username}}.</span><a class="navbar-item is-uppercase" href="{% url 'logout' %}?next=/">Log out </a>
-   { else }
-    <a class="navbar-item is-uppercase" href="{% url 'login' %}?next=/">Login/Register</a>
-    { endif }
-
-        </div-->
-      </div>
       </div>
           {% endif %}
   </nav>
@@ -164,7 +177,7 @@
 {% block modal %}{% endblock modal %}
 
 {% block footer %}
-  <footer class="footer has-background-black-ter has-text-white-ter">
+  <footer class="footer has-text-white-ter is-transparent" style="background-color: transparent;">
     <div class="container">
       <div class="content has-text-centered">
         <p>

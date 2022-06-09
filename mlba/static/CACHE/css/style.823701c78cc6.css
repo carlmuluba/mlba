@@ -1,0 +1,94 @@
+/* line 1, mlba/static/style.scss */
+html {
+  background-color: #242424 !important; }
+
+/* line 5, mlba/static/style.scss */
+.bg_overlay {
+  /* Height & width depends on how you want to reveal the overlay (see JS below) */
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  /* Stay in place */
+  z-index: 0;
+  /* Sit on top */
+  left: 0;
+  top: 0;
+  background-color: transparent;
+  /* background-color: rgb(0,0,0); Black fallback color */
+  /* background-color: rgba(0,0,0, 0.9); Black w/opacity */
+  overflow-x: hidden;
+  /* Disable horizontal scroll */
+  transition: 0.5s;
+  /* 0.5 second transition effect to slide in or slide down the overlay (height or width, depending on reveal) */ }
+
+/* line 19, mlba/static/style.scss */
+.ipfs_img {
+  min-width: 200%;
+  /* center image */
+  margin-left: -50%;
+  margin-top: -50%;
+  height: auto; }
+
+/* line 26, mlba/static/style.scss */
+.navbar-menu {
+  background-color: #242424 !important; }
+
+/* line 29, mlba/static/style.scss */
+.is-size-1-desktop {
+  font-size: 4rem !important; }
+
+/* line 32, mlba/static/style.scss */
+.is-size-1-mobile {
+  font-size: 2rem !important; }
+
+/* line 35, mlba/static/style.scss */
+.label {
+  color: #fafafa; }
+
+/* line 38, mlba/static/style.scss */
+.content a {
+  color: #f5f5f5; }
+
+/* Bulma uses SASS mixins for creating CSS outputs */
+/* line 54, mlba/static/style.scss */
+.loader-mixin {
+  animation: spinAround .5s infinite linear;
+  border: 2px solid #f1f1f1;
+  border-radius: 9999px;
+  border-right-color: transparent;
+  border-top-color: transparent;
+  display: block;
+  height: 1em;
+  position: relative;
+  width: 1em; }
+
+/* line 59, mlba/static/style.scss */
+video {
+  object-fit: cover;
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0; }
+
+/* line 67, mlba/static/style.scss */
+.video-wrapper {
+  border: 2px solid #000;
+  min-width: 100%;
+  min-height: 100%;
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center; }
+
+@media screen and (min-width: 1024px) {
+  /* line 80, mlba/static/style.scss */
+  .navbar-link.is-active, a.navbar-item.is-active {
+    color: #fafafa; } }
+
+/* line 85, mlba/static/style.scss */
+.navbar-link.is-active, .navbar-link:focus, .navbar-link:focus-within, .navbar-link:hover, a.navbar-item.is-active, a.navbar-item:focus, a.navbar-item:focus-within, a.navbar-item:hover {
+  background-color: transparent;
+  color: #fafafa; }

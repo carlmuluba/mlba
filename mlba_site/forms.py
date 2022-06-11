@@ -54,6 +54,16 @@ class UrbanImgForm(ModelForm):
         self.fields['urban_tb'].widget = forms.HiddenInput()
 
 
+class UrbanImgMultipleForm(ModelForm):
+    class Meta:
+        model = UrbanImgMultiple
+        fields = '__all__'
+
+    def __init__(self, *args, **kwargs):
+        forms.ModelForm.__init__(self, *args, **kwargs)
+        self.fields['urban_img_tb'].widget = forms.HiddenInput()
+
+
 class ResourceForm(ModelForm):
     class Meta:
         model = Resource

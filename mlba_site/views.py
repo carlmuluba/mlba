@@ -81,8 +81,8 @@ def edit_a00(request, pk):
         form.save()  # commit=False)
         return HttpResponseRedirect('/view_a00/' + str(pk))
     # add form dictionary to context
-    context["form"] = form
-    context['img_obj'] = img_obj
+    context["form", 'img_obj'] = form
+    # context['img_obj'] = img_obj
 
     return render(request, template_name, context)
 
@@ -264,10 +264,17 @@ def view_urban(request, pk):
     # field names as keys
     urban_data = Urban.objects.get(id=pk)
     img = UrbanImage.objects.get(urban_tb=pk)
+    ig = UrbanImgMultiple.objects.filter(urban_i_m_tb=pk)
+    if ig != "":
+        img_multiple = UrbanImgMultiple.objects.filter(urban_i_m_tb=pk)
+    else:
+        img_multiple = pk
+        print('NODATA FOUND')
 
     # add the dictionary during initialization
 
-    return render(request, "urbans/view_urban.html", {'urban_data': urban_data, 'img': img})
+    return render(request, "urbans/view_urban.html",
+                  {'urban_data': urban_data, 'img': img, 'img_multiple': img_multiple})
 
 
 def edit_urban(request, pk):
@@ -291,7 +298,6 @@ def edit_urban(request, pk):
     context['img_obj'] = img_obj
 
     return render(request, template_name, context)
-
 
 
 def delete_urban(request, id):
@@ -359,6 +365,47 @@ def delete_urban_img(request, urban_id):
 
     else:
         return HttpResponseRedirect("/view_urban/" + str(urban_id))
+
+    print('WhatIds', urban_id)
+
+
+# ::::::: UrbanImagesMultiple
+# @login_required(login_url=reverse_lazy('login'))
+def create_u_i_m(request, urban_img_id=None, urban_id=None):
+    template_name = 'urban_imgs_multiple/create_u_i_m.html'
+    context = {}
+    initial_dict = {
+        "urban_img_tb": urban_img_id,
+        "urban_tb": urban_id,
+    }
+
+    form = UrbanImgMultipleForm(request.POST or None, initial=initial_dict)
+    if request.method == "POST":
+        form = UrbanImgMultipleForm(request.POST, request.FILES)
+        if form.is_valid():
+            inst = form.save(commit=False)
+            try:
+                inst.user = request.user
+            except Exception:
+                pass
+            inst.save()
+
+            return HttpResponseRedirect('/view_img_urban/' + str(urban_img_id))
+    context['form'] = form
+    return render(request, template_name, context)
+
+
+def delete_u_i_m(request, urban_img_multiple_id):
+    img = get_object_or_404(UrbanImgMultiple, urban_tb=urban_img_multiple_id)
+
+    if urban_img_multiple_id != '':
+        cloudinary.uploader.destroy(img.cl_img_multiple.public_id, invalidate=True)
+        img.delete()
+
+        return HttpResponseRedirect("/list_urbans/")
+
+    else:
+        return HttpResponseRedirect("/view_urban/" + str(urban_img_id))
 
     print('WhatIds', urban_id)
 

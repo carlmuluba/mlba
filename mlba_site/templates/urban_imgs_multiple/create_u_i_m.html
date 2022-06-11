@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% load bulma_tags %}
+{% load cloudinary %}
+
+{% block content %}
+{% if submitted %}
+<div class="container">
+<p class="success">Your Image was submitted successfully! </p>
+<div class="container">
+{% else %}
+<div class="container">
+<div class="columns">
+ <div class="column is-three-fifths is-offset-one-fifth">
+     <div class="columns">
+  <div class="column">
+    <figure class="image is-96x96">
+      <img id="img">
+    </figure>
+  </div>
+     </div>
+<form class="" action="" enctype="multipart/form-data" method="post" novalidate>
+   {% csrf_token %}
+   {{ form|bulma }}
+    {{ backend_form }}
+
+   <div class="field">
+     <button type="submit" class="button is-primary">Submit</button>
+   </div>
+   <input type="hidden" name="next" value="{{ next }}"/>
+
+</form>
+</div>
+</div>
+{% endif %}
+
+</div>
+
+{% endblock content %}
+{% block javascript %}
+<script>
+document.getElementById("id_cl_img_multiple").onchange = function () {
+    var reader = new FileReader();
+
+    reader.onload = function (e) {
+        // get loaded data and render thumbnail.
+        document.getElementById("img").src = e.target.result;
+    };
+
+    // read the image file as a data URL.
+    reader.readAsDataURL(this.files[0]);
+};
+</script>
+{% endblock javascript %}

@@ -27,6 +27,9 @@ urlpatterns = [
     path('create_urban_img/<int:urban_id>', views.create_urban_img, name='create-urban-img-request'),
     path('<urban_id>/delete_urban_img', views.delete_urban_img, name='delete-urban-img'),
 
+    path('create_u_i_m/<int:urban_id>', views.create_u_i_m, name='create-u-i-m-request'),
+    path('<urban_id>/delete_u_i_m', views.delete_u_i_m, name='delete-u-i-m'),
+
     path('create_resource/', views.create_resource, name='create-resource-request'),
     path('edit_resource/<int:pk>', views.edit_resource, name='edit-resource-request'),
     path('view_resource/<int:pk>', views.view_resource, name='view-resource-request'),

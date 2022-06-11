@@ -4,6 +4,8 @@
 <div class="container sitecontent">
     <div class="has-text-right"><a href="{% url 'list-a00s' %}"><span class="delete" aria-label="close"></span></a></div>
     <div class="is-size-3 has-text-centered is-uppercase"><h1>{{a00_data.title}}</h1> </div>
+    <div class="columns is-desktop">
+        <div class="column is-two-thirds-desktop">
       {% if img != '' %}
   <div class="card-image">
     <figure class="image is-1by1">
@@ -11,11 +13,15 @@
     </figure>
   </div>
     {% endif %}
+        </div>
+    <div class="column">
     <div class="content is-medium">
         <h2>Description: </h2>
         <p>{{a00_data.desc}}</p>
         <h4>Published on: </h4>
         <p>{{a00_data.pub_date}}</p>
+</div>
+    </div>
 </div>
 </div>
 {% endblock content %}

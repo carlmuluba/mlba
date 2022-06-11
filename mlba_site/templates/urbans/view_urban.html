@@ -4,16 +4,36 @@
 <div class="container sitecontent">
     <div class="has-text-right"><a href="{% url 'list-urbans' %}"><span class="delete" aria-label="close"></span></a></div>
     <div class="is-size-3 has-text-centered is-uppercase"><h1>{{urban_data.title}}</h1> </div>
+    <div class="columns is-desktop">
+        <div class="column is-two-thirds-desktop">
   <div class="card-image">
     <figure class="image is-1by1">
         {% cloudinary img.cl_img format="jpg" width=1200 height=1200 crop="fill" %}
     </figure>
   </div>
+        </div>
+    <div class="column">
     <div class="content is-medium">
         <h2>Description: </h2>
         <p>{{urban_data.desc}}</p>
         <h4>Published on: </h4>
         <p>{{urban_data.pub_date}}</p>
 </div>
+    </div>
+     </div>
+        <div class="columns is-multiline is-desktop">
+        {% if user.is_authenticated %}
+        <a class="button is-primary" href="{% url 'create-u-i-m-request' %}?urban_img_id={{urban_data.id}}&urban_id={{urban_data.urban_td}}">Add Image</a>
+        {% endif %}
+        {% for dt in img_multiple %}
+    <div class="card-image">
+        <figure class="image is-1by1">
+            {% cloudinary dt.cl_img_multiple format="jpg" width=400 height=400 crop="fill" %}
+        </figure>
+    </div>
+        {% empty %}
+            <div class="is-size-3 has-text-centered is-uppercase" style="margin-left: auto; margin-right: auto;"><h3>No Images Yet</h3> </div>
+        {% endfor %}
+        </div>
 </div>
 {% endblock content %}

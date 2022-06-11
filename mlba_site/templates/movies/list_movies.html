@@ -3,20 +3,20 @@
     <div class="row">
         <p class="is-size-2 has-text-centered is-uppercase">Short Movies </p>
         <!-- loop through all the images -->
-        <div class="columns is-multiline is-desktop">
+        <div class="columns is-desktop">
         {% for pic in all_movies %}
             <div class="column is-3">
         <div class="card has-background-grey-darker">
   <div class="card-image">
       <figure class="image is-16by9">
-  <iframe class="has-ratio" width="640" height="360" src="https://ipfs.infura-ipfs.io/ipfs/{{pic.url}}" frameborder="0" allowfullscreen></iframe>
+  <iframe class="has-ratio" width="640" height="360" src="https://ipfs.infura-ipfs.io/ipfs/{{pic.url}}" frameborder="0"></iframe>
 </figure>
   </div>
-            <div class="card-content">
+            <!--div class="card-content">
       <div class="media-content">
         <p class="title is-4 has-text-grey-light">{{pic.title}}</p>
       </div>
-    </div>
+    </div-->
 
 </div>
             </div>

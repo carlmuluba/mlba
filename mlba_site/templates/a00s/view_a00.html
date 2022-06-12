@@ -12,7 +12,18 @@
         {% cloudinary img.cl_img format="jpg" width=1200 height=1200 crop="fill" %}
     </figure>
   </div>
-    {% endif %}
+            {% else %}
+  <div class="card-image">
+    <figure class="image is-1by1">
+          <img src="https://bulma.io/images/placeholders/256x256.png">
+    </figure>
+  </div>
+      {% endif %}
+        {% if user.is_authenticated %}
+            <div class="column">
+        <a class="button is-danger" href="{% url 'delete-a00-img-request' pk=img.id a00_id=a00_data.id %}">Delete Image</a>
+            </div>
+        {% endif %}
         </div>
     <div class="column">
     <div class="content is-medium">

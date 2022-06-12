@@ -7,10 +7,9 @@ urlpatterns = [
     path('edit_a00/<int:pk>', views.edit_a00, name='edit-a00-request'),
     path('view_a00/<int:pk>', views.view_a00, name='view-a00-request'),
     path('list_a00s/', views.list_a00s, name='list-a00s'),
-    path('<id>/delete_a00', views.delete_a00),
 
     path('create_a00_img/<int:a00_id>', views.create_a00_img, name='create-a00-img-request'),
-    path('<a00_id>/delete_a00_img', views.delete_a00_img, name="delete-a00-img"),
+    path('<pk>&<a00_id>/delete_a00_img', views.delete_a00_img, name="delete-a00-img-request"),
 
     path('create_movie/', views.create_movie, name='create-movie-request'),
     path('edit_movie/<int:pk>', views.edit_movie, name='edit-movie-request'),
@@ -25,10 +24,10 @@ urlpatterns = [
     path('<id>/delete_urban', views.delete_urban),
 
     path('create_urban_img/<int:urban_id>', views.create_urban_img, name='create-urban-img-request'),
-    path('<urban_id>/delete_urban_img', views.delete_urban_img, name='delete-urban-img'),
+    path('<pk>&<urban_id>/delete_urban_img', views.delete_urban_img, name='delete-urban-img-request'),
 
     path('create_u_i_m/<int:urban_id>', views.create_u_i_m, name='create-u-i-m-request'),
-    path('<urban_id>/delete_u_i_m', views.delete_u_i_m, name='delete-u-i-m'),
+    path('<pk>&<urban_id>/delete_u_i_m', views.delete_u_i_m, name='delete-u-i-m-request'),
 
     path('create_resource/', views.create_resource, name='create-resource-request'),
     path('edit_resource/<int:pk>', views.edit_resource, name='edit-resource-request'),

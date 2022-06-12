@@ -87,23 +87,13 @@ def edit_a00(request, pk):
     return render(request, template_name, context)
 
 
-def delete_a00(id):
-    img = get_object_or_404(A00Image, a00_tb=id)
-
-    cloudinary.uploader.destroy(img.cl_img.public_id, invalidate=True)
-    if img != '':
-        img.delete()
-
-        return HttpResponseRedirect("/list_a00s/")
-        success_message = "Item %(name)s deleted successfully"
-    else:
-        return HttpResponseRedirect("/view_a00/" + str(id))
-
-
 def list_a00s(request):
     context = {}
-    # a00_i = A00Img
-    all_a00s = A00Image.objects.all().prefetch_related("a00_tb")  # A00.objects.select_related()
+    # a00s = A00.objects.all()
+
+    all_a00s = A00Image.objects.all().prefetch_related("a00_tb")
+
+    # all_a00s = a00s.a00_tb.all()
     template = 'a00s/list_a00s.html'
     context['all_a00s'] = all_a00s
 
@@ -137,17 +127,19 @@ def create_a00_img(request, a00_id):
     return render(request, template_name, context)
 
 
-def delete_a00_img(request, a00_id):
-    img = get_object_or_404(A00Image, a00_tb=a00_id)
+def delete_a00_img(request, pk, a00_id):
+    img = get_object_or_404(A00Image, id=pk)
+    obj = get_object_or_404(A00, id=a00_id)
 
-    if a00_id != '':
+    if pk != '':
         cloudinary.uploader.destroy(img.cl_img.public_id, invalidate=True)
         img.delete()
+        obj.delete()
 
         return HttpResponseRedirect("/list_a00s/")
 
     else:
-        return HttpResponseRedirect("/view_a00/" + str(id))
+        return HttpResponseRedirect("/view_a00/" + str(a00_id))
 
     print('WhatIds', a00_id)
 
@@ -236,7 +228,7 @@ def list_movies(request):
 
 # ::::::: Urban
 
-# @login_required(login_url=reverse_lazy('login'))
+@login_required(login_url=reverse_lazy('login'))
 def create_urban(request):
     submitted = False
     if request.method == 'POST':
@@ -354,8 +346,8 @@ def create_urban_img(request, urban_id=None):
     return render(request, template_name, context)
 
 
-def delete_urban_img(request, urban_id):
-    img = get_object_or_404(UrbanImage, urban_tb=urban_id)
+def delete_urban_img(request, pk, urban_id):
+    img = get_object_or_404(UrbanImage, id=pk)
 
     if urban_id != '':
         cloudinary.uploader.destroy(img.cl_img.public_id, invalidate=True)

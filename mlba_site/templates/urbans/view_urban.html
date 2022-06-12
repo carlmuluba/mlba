@@ -11,6 +11,11 @@
         {% cloudinary img.cl_img format="jpg" width=1200 height=1200 crop="fill" %}
     </figure>
   </div>
+        {% if user.is_authenticated %}
+            <div class="column">
+        <a class="button is-danger" href="{% url 'delete-urban-img-request' pk=img.id urban_id=img.urban_tb %}">Delete Image</a>
+            </div>
+        {% endif %}
         </div>
     <div class="column">
     <div class="content is-medium">
@@ -34,6 +39,11 @@
             {% cloudinary dt.cl_img_multiple format="jpg" width=400 height=400 crop="fill" %}
         </figure>
     </div>
+        {% if user.is_authenticated %}
+            <div class="column">
+        <a class="button is-danger" href="{% url 'delete-u-i-m-request' pk=dt.id urban_id=dt.urban_i_m_tb %}">Delete Image</a>
+            </div>
+        {% endif %}
             </div>
         {% empty %}
             <div class="is-size-3 has-text-centered is-uppercase" style="margin-left: auto; margin-right: auto;"><h3>No Images Yet</h3> </div>

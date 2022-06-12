@@ -11,7 +11,7 @@ class A00(models.Model):
     pub_date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.title
+        return self.id
 
 
 class A00Image(models.Model):

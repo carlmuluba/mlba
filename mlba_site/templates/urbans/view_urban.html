@@ -21,19 +21,24 @@
 </div>
     </div>
      </div>
-        <div class="columns is-multiline is-desktop">
         {% if user.is_authenticated %}
+            <div class="column">
         <a class="button is-primary" href="{% url 'create-u-i-m-request' urban_data.id %}">Add Image</a>
+            </div>
         {% endif %}
+        <div class="columns is-multiline is-desktop">
         {% for dt in img_multiple %}
+            <div class="column is-3">
     <div class="card-image">
         <figure class="image is-1by1">
             {% cloudinary dt.cl_img_multiple format="jpg" width=400 height=400 crop="fill" %}
         </figure>
     </div>
+            </div>
         {% empty %}
             <div class="is-size-3 has-text-centered is-uppercase" style="margin-left: auto; margin-right: auto;"><h3>No Images Yet</h3> </div>
-        {% endfor %}
+
+            {% endfor %}
         </div>
 </div>
 {% endblock content %}

@@ -266,7 +266,7 @@ def view_urban(request, pk):
     img = UrbanImage.objects.get(urban_tb=pk)
     ig = UrbanImgMultiple.objects.filter(urban_i_m_tb=pk)
     if ig != "":
-        img_multiple = UrbanImgMultiple.objects.filter(urban_i_m_tb=pk)
+        img_multiple = urban_data.urban_i_m_tb.all()
     else:
         img_multiple = pk
         print('NODATA FOUND')
@@ -371,12 +371,11 @@ def delete_urban_img(request, urban_id):
 
 # ::::::: UrbanImagesMultiple
 # @login_required(login_url=reverse_lazy('login'))
-def create_u_i_m(request, urban_img_id=None, urban_id=None):
+def create_u_i_m(request, urban_id=None):
     template_name = 'urban_imgs_multiple/create_u_i_m.html'
     context = {}
     initial_dict = {
-        "urban_img_tb": urban_img_id,
-        "urban_tb": urban_id,
+        "urban_i_m_tb": urban_id,
     }
 
     form = UrbanImgMultipleForm(request.POST or None, initial=initial_dict)
@@ -390,22 +389,22 @@ def create_u_i_m(request, urban_img_id=None, urban_id=None):
                 pass
             inst.save()
 
-            return HttpResponseRedirect('/view_img_urban/' + str(urban_img_id))
+            return HttpResponseRedirect('/view_urban/' + str(urban_id))
     context['form'] = form
     return render(request, template_name, context)
 
 
-def delete_u_i_m(request, urban_img_multiple_id):
-    img = get_object_or_404(UrbanImgMultiple, urban_tb=urban_img_multiple_id)
+def delete_u_i_m(request, pk, urban_id):
+    img = get_object_or_404(UrbanImgMultiple, id=pk)
 
-    if urban_img_multiple_id != '':
+    if id != '':
         cloudinary.uploader.destroy(img.cl_img_multiple.public_id, invalidate=True)
         img.delete()
 
         return HttpResponseRedirect("/list_urbans/")
 
     else:
-        return HttpResponseRedirect("/view_urban/" + str(urban_img_id))
+        return HttpResponseRedirect("/view_urban/" + str(urban_id))
 
     print('WhatIds', urban_id)
 

@@ -2,7 +2,7 @@
 {% load cloudinary %}
 {% block content %}
 <div class="container sitecontent">
-    <div class="has-text-right"><a href="{% url 'list-urbans' %}"><span class="delete" aria-label="close"></span></a></div>
+    <div class="has-text-right"><a href="{% url 'list-urbans' %}"><span class="delete is-large" aria-label="close"></span></a></div>
     <div class="is-size-3 has-text-centered is-uppercase"><h1>{{urban_data.title}}</h1> </div>
     <div class="columns is-desktop">
         <div class="column is-two-thirds-desktop">
@@ -52,8 +52,8 @@
                 <div id="modal-image-{{dt.cl_img_multiple}}"  class="modal">
   <div class="modal-background"></div>
   <div class="modal-content">
-    <p class="image is-4by3">
-      {% cloudinary dt.cl_img_multiple format="jpg" width=1280 height=960 crop="fill" %}
+    <p class="image is-1by1">
+      {% cloudinary dt.cl_img_multiple format="jpg" width=600 height=600 crop="fill" %}
     </p>
   </div>
   <button class="modal-close is-large" aria-label="close"></button>

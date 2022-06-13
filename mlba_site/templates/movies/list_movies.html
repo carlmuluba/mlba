@@ -5,21 +5,30 @@
         <!-- loop through all the images -->
         <div class="columns is-desktop">
         {% for pic in all_movies %}
-            <div class="column is-3">
-        <div class="card has-background-grey-darker">
+            <a class="column is-3 js-modal-trigger" data-target="modal-video-{{pic.url}}">
+        <div class="card has-background-black-bis">
   <div class="card-image">
+      <figure class="image is-16by9">
+  <iframe class="has-ratio" width="640" height="360" src="https://ipfs.infura-ipfs.io/ipfs/{{pic.url}}?controls=0" frameborder="0" allow="accelerometer; autoplay; modestbranding; encrypted-media; gyroscope; picture-in-picture" ></iframe>
+</figure>
+  </div>
+            <div class="card-content">
+      <div class="media-content">
+        <p class="has-text-grey-light">{{pic.title}}</p>
+      </div>
+    </div>
+
+</div>
+            </a>
+                <div id="modal-video-{{pic.url}}"  class="modal">
+  <div class="modal-background"></div>
+  <div class="modal-content">
       <figure class="image is-16by9">
   <iframe class="has-ratio" width="640" height="360" src="https://ipfs.infura-ipfs.io/ipfs/{{pic.url}}" frameborder="0"></iframe>
 </figure>
   </div>
-            <!--div class="card-content">
-      <div class="media-content">
-        <p class="title is-4 has-text-grey-light">{{pic.title}}</p>
-      </div>
-    </div-->
-
+  <button class="modal-close is-large" aria-label="close"></button>
 </div>
-            </div>
         {% endfor %}
         </div>
     </div>

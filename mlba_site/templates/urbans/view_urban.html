@@ -6,14 +6,16 @@
     <div class="is-size-3 has-text-centered is-uppercase"><h1>{{urban_data.title}}</h1> </div>
     <div class="columns is-desktop">
         <div class="column is-two-thirds-desktop">
+        <div class="card has-background-black-ter has-text-white-ter">
   <div class="card-image">
     <figure class="image is-1by1">
         {% cloudinary img.cl_img format="jpg" width=1200 height=1200 crop="fill" %}
     </figure>
   </div>
+        </div>
         {% if user.is_authenticated %}
             <div class="column">
-        <a class="button is-danger" href="{% url 'delete-urban-img-request' pk=img.id urban_id=img.urban_tb %}">Delete Image</a>
+        <a class="tag is-delete is-danger" href="{% url 'delete-urban-img-request' pk=img.id urban_id=img.urban_tb %}"></a>
             </div>
         {% endif %}
         </div>
@@ -34,17 +36,28 @@
         <div class="columns is-multiline is-desktop">
         {% for dt in img_multiple %}
             <div class="column is-3">
-    <div class="card-image">
+        <div class="card has-background-black-ter has-text-white-ter">
+    <a class="card-image js-modal-trigger" data-target="modal-image-{{dt.cl_img_multiple}}">
         <figure class="image is-1by1">
             {% cloudinary dt.cl_img_multiple format="jpg" width=400 height=400 crop="fill" %}
         </figure>
-    </div>
+    </a>
+        </div>
         {% if user.is_authenticated %}
-            <div class="column">
-        <a class="button is-danger" href="{% url 'delete-u-i-m-request' pk=dt.id urban_id=dt.urban_i_m_tb %}">Delete Image</a>
+            <div>
+        <a class="tag is-delete is-danger" href="{% url 'delete-u-i-m-request' pk=dt.id urban_id=dt.urban_i_m_tb %}"></a>
             </div>
         {% endif %}
             </div>
+                <div id="modal-image-{{dt.cl_img_multiple}}"  class="modal">
+  <div class="modal-background"></div>
+  <div class="modal-content">
+    <p class="image is-4by3">
+      {% cloudinary dt.cl_img_multiple format="jpg" width=1280 height=960 crop="fill" %}
+    </p>
+  </div>
+  <button class="modal-close is-large" aria-label="close"></button>
+</div>
         {% empty %}
             <div class="is-size-3 has-text-centered is-uppercase" style="margin-left: auto; margin-right: auto;"><h3>No Images Yet</h3> </div>
 

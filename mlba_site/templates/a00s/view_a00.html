@@ -7,11 +7,13 @@
     <div class="columns is-desktop">
         <div class="column is-two-thirds-desktop">
       {% if img != '' %}
+        <div class="card has-background-black-ter has-text-white-ter">
   <div class="card-image">
     <figure class="image is-1by1">
         {% cloudinary img.cl_img format="jpg" width=1200 height=1200 crop="fill" %}
     </figure>
   </div>
+        </div>
             {% else %}
   <div class="card-image">
     <figure class="image is-1by1">
@@ -21,7 +23,7 @@
       {% endif %}
         {% if user.is_authenticated %}
             <div class="column">
-        <a class="button is-danger" href="{% url 'delete-a00-img-request' pk=img.id a00_id=a00_data.id %}">Delete Image</a>
+        <a class="tag is-delete is-danger" href="{% url 'delete-a00-img-request' pk=img.id a00_id=a00_data.id %}"></a>
             </div>
         {% endif %}
         </div>

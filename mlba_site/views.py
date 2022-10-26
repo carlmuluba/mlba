@@ -24,6 +24,7 @@ from django.views.generic.detail import DetailView
 from django.contrib.auth.decorators import login_required
 
 
+
 # ::::::: A00s
 # @login_required(login_url=reverse_lazy('login'))
 def create_a00(request):

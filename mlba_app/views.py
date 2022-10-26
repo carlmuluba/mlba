@@ -3,8 +3,7 @@ from mlba import settings
 from django.shortcuts import render
 from django.contrib.staticfiles.urls import static
 from django.http import HttpResponse
-from mlba_app.models import Page
-
+from mlba_app.models import Page 
 
 def index(request, pagename):
     path = settings.MEDIA_ROOT

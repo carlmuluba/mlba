@@ -1,3 +1,7 @@
 db.sqlite3
-venv/
+.idea/
 *.pyc
+env-0
+env-back
+env.old
+Procfile

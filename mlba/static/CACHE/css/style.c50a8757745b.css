@@ -1,0 +1,415 @@
+@import url("https://fonts.googleapis.com/css2?family=Khand:wght@400;600;700&family=Teko:wght@300;400;600&family=Libre+Baskerville:wght@200;400;700&display=swap");
+/* line 3, mlba/static/styles/style.scss */
+html {
+  background-color: #242424 !important;
+  scroll-behavior: smooth; }
+
+/* line 7, mlba/static/styles/style.scss */
+html, body {
+  cursor: url("/static/images/iionu/cursor-white.svg?8c422375c3e1"), default;
+  /* just change the cursor.ico path to your location */ }
+
+/* line 12, mlba/static/styles/style.scss */
+.bg_overlay {
+  /* Height & width depends on how you want to reveal the overlay (see JS below) */
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  /* Stay in place */
+  z-index: 0;
+  /* Sit on top */
+  left: 0;
+  top: 0;
+  background-color: transparent;
+  /* background-color: rgb(0,0,0); Black fallback color */
+  /* background-color: rgba(0,0,0, 0.9); Black w/opacity */
+  overflow-x: hidden;
+  /* Disable horizontal scroll */
+  transition: 0.5s;
+  /* 0.5 second transition effect to slide in or slide down the overlay (height or width, depending on reveal) */ }
+
+/* line 26, mlba/static/styles/style.scss */
+.ipfs_img {
+  min-width: 200%;
+  /* center image */
+  margin-left: -50%;
+  margin-top: -50%;
+  height: auto; }
+
+/*
+.navbar-menu {
+  background-color: #242424 !important;
+  }
+  */
+/* line 38, mlba/static/styles/style.scss */
+.is-size-1-desktop {
+  font-size: 4rem !important; }
+
+/* line 41, mlba/static/styles/style.scss */
+.is-size-1-mobile {
+  font-size: 2rem !important; }
+
+/* line 44, mlba/static/styles/style.scss */
+.label {
+  color: #fafafa; }
+
+/* line 47, mlba/static/styles/style.scss */
+.content a {
+  color: #f5f5f5; }
+
+/* Bulma uses SASS mixins for creating CSS outputs */
+/* line 63, mlba/static/styles/style.scss */
+.loader-mixin {
+  animation: spinAround .5s infinite linear;
+  border: 2px solid #f1f1f1;
+  border-radius: 9999px;
+  border-right-color: transparent;
+  border-top-color: transparent;
+  display: block;
+  height: 1em;
+  position: relative;
+  width: 1em; }
+
+/* line 68, mlba/static/styles/style.scss */
+video {
+  object-fit: cover;
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0; }
+
+/* line 76, mlba/static/styles/style.scss */
+.video-wrapper {
+  border: 2px solid #000;
+  min-width: 100%;
+  min-height: 100%;
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center; }
+
+/*
+@media screen and (min-width: 1024px){
+.navbar-burger {
+    color: #4a4a4a;
+    cursor: pointer;
+    display: block;
+    height: 3.25rem;
+    position: relative;
+    width: 3.25rem;
+    margin-left: auto;
+}
+.navbar-link.is-active, a.navbar-item.is-active{
+  color: #fafafa;
+}
+}*/
+/* line 104, mlba/static/styles/style.scss */
+.navbar {
+  background-color: rgba(0, 0, 0, 0.6);
+  min-height: 4rem;
+  border-bottom: #f5f5f5 solid 1px; }
+
+/* line 109, mlba/static/styles/style.scss */
+.ii-nav-menu {
+  margin-top: 1px; }
+
+/* line 112, mlba/static/styles/style.scss */
+.navbar-burger span:nth-child(2) {
+  top: calc(90% - 4px); }
+
+/* line 115, mlba/static/styles/style.scss */
+.navbar-burger span {
+  background-color: #f5f5f5;
+  height: 4px;
+  width: 60px;
+  left: calc(0% - 20px); }
+
+/* line 121, mlba/static/styles/style.scss */
+.ii-nav-menu {
+  font-family: 'khand', sans-serif;
+  font-weight: 700; }
+
+/* line 125, mlba/static/styles/style.scss */
+.ii-nav-menu.is-active {
+  background-color: rgba(0, 0, 0, 0.8);
+  min-height: 100vh;
+  display: block; }
+
+/* line 132, mlba/static/styles/style.scss */
+.navbar-menu {
+  display: none; }
+
+/* line 138, mlba/static/styles/style.scss */
+.navbar-link.is-active, .navbar-link:focus, .navbar-link:focus-within, .navbar-link:hover, a.navbar-item.is-active, a.navbar-item:focus, a.navbar-item:focus-within, a.navbar-item:hover {
+  background-color: transparent;
+  color: #fafafa; }
+
+/* line 143, mlba/static/styles/style.scss */
+.navbar, .navbar-end, .navbar-menu.is-active, .navbar-start {
+  justify-content: flex-end;
+  display: block; }
+
+/* line 147, mlba/static/styles/style.scss */
+.navbar-menu.is-active {
+  position: absolute;
+  width: 100vw; }
+
+/* line 151, mlba/static/styles/style.scss */
+.navbar-burger {
+  color: #4a4a4a;
+  cursor: pointer;
+  display: block;
+  height: 3.25rem;
+  position: absolute;
+  width: 3.25rem;
+  right: 1rem; }
+
+/*
+.navbar-end {
+    margin-left: auto;
+    display: block;
+}
+
+.navbar-item, .navbar-link {
+  color: #4a4a4a;
+  display: block;
+  line-height: 1.5;
+  padding: .5rem .75rem;
+  position: relative;
+}*/
+/* line 173, mlba/static/styles/style.scss */
+a, a.navbar-burger, .navbar-link, a.navbar-item {
+  cursor: url("/static/images/iionu/pointer-white.svg?59d04e6ddd8d"), pointer; }
+
+/* line 177, mlba/static/styles/style.scss */
+.navbar-item.is-active {
+  height: 11vw;
+  line-height: 8;
+  font-size: 15vw;
+  margin-top: -20px;
+  overflow: hidden; }
+
+@media screen and (max-width: 1024px) {
+  /* line 185, mlba/static/styles/style.scss */
+  .navbar-item.is-active {
+    height: 10vw;
+    line-height: 1;
+    font-size: 12vw;
+    margin-top: -20px;
+    overflow: hidden; } }
+
+@media screen and (max-width: 760px) {
+  /* line 194, mlba/static/styles/style.scss */
+  .navbar-item.is-active {
+    height: 10vw;
+    line-height: 1;
+    font-size: 10vw;
+    margin-top: -15px;
+    overflow: hidden; } }
+
+/* line 203, mlba/static/styles/style.scss */
+#ii {
+  --color: black;
+  --hover-color: black;
+  color: var(--color); }
+
+/* line 209, mlba/static/styles/style.scss */
+#ii:hover {
+  color: var(--hover-color); }
+
+/* line 215, mlba/static/styles/style.scss */
+.content h2 {
+  font-weight: 400;
+  font-size: 3.5vw; }
+
+@media screen and (min-width: 1024px) {
+  /* line 220, mlba/static/styles/style.scss */
+  .content h2 {
+    font-weight: 400;
+    font-size: 1.8vw; } }
+
+/* line 225, mlba/static/styles/style.scss */
+.ii-txt-shadow {
+  text-shadow: 1px 7px 6px rgba(0, 0, 0, 0.6); }
+
+/*
+.ii-header-txt{
+  font-family: 'khand', sans-serif;
+  font-weight: 700;
+  font-size: 6vw;
+}
+*/
+/* line 235, mlba/static/styles/style.scss */
+.ii-header-txt {
+  font-family: 'khand', sans-serif;
+  font-weight: 700;
+  font-size: 8vw; }
+
+@media screen and (max-width: 1024px) {
+  /* line 241, mlba/static/styles/style.scss */
+  .ii-header-txt {
+    font-size: 12vw; } }
+
+/* line 245, mlba/static/styles/style.scss */
+.ii-txt-block {
+  font-weight: 200;
+  font-size: 1.8vw;
+  line-height: 1.25; }
+
+/* line 250, mlba/static/styles/style.scss */
+.ii-txt-font {
+  font-family: 'Libre Baskerville', serif; }
+
+/* line 255, mlba/static/styles/style.scss */
+.ii-bgimg-1, .ii-bgimg-2, .ii-bgimg-3, .ii-bgimg-4, .ii-bgimg-5, .ii-bgimg-6, .ii-bgimg-7 {
+  min-height: 100vh;
+  position: relative;
+  opacity: 1;
+  top: -77px;
+  padding: 10vw 2% 10% 2%; }
+
+/* line 264, mlba/static/styles/style.scss */
+.ii-bgimg-1 {
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed;
+  background-size: cover;
+  text-align: center;
+  min-height: 920px; }
+
+/* line 272, mlba/static/styles/style.scss */
+.ii-hero-body {
+  height: 200px; }
+
+/* line 276, mlba/static/styles/style.scss */
+.ii-logo {
+  width: 40vw;
+  position: relative;
+  left: auto;
+  right: auto; }
+
+@media screen and (max-width: 1024px) {
+  /* line 283, mlba/static/styles/style.scss */
+  .ii-hero-body {
+    height: 200px;
+    margin-top: 10vw; }
+  /* line 287, mlba/static/styles/style.scss */
+  .ii-logo {
+    width: 50vw; } }
+
+@media screen and (max-width: 760px) {
+  /* line 293, mlba/static/styles/style.scss */
+  .ii-hero-body {
+    height: 200px;
+    margin-top: 20vw; }
+  /* line 297, mlba/static/styles/style.scss */
+  .ii-logo {
+    width: 80%; }
+  /* line 300, mlba/static/styles/style.scss */
+  .ii-ar {
+    top: 6vw;
+    margin-top: 6vw; } }
+
+/* line 307, mlba/static/styles/style.scss */
+.ii-h-b {
+  text-align: center;
+  z-index: 999; }
+
+/* line 311, mlba/static/styles/style.scss */
+.ii-ar {
+  width: 100px;
+  height: 100px;
+  position: relative;
+  margin-top: 2.5vw;
+  margin-left: auto;
+  margin-right: auto;
+  background-image: url("/static/images/iionu/arrow-white.svg?f0e5dbaa756b");
+  background-size: cover; }
+
+/* line 323, mlba/static/styles/style.scss */
+.ii-bgimg-2 {
+  background: #00d1b2;
+  background: -moz-linear-gradient(180deg, #00d1b2 0%, #a4efe4 42%, #e8fbf8 72%, white 100%);
+  background: -webkit-linear-gradient(180deg, #00d1b2 0%, #a4efe4 42%, #e8fbf8 72%, white 100%);
+  background: linear-gradient(180deg, #00d1b2 0%, #a4efe4 42%, #e8fbf8 72%, white 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#00d1b2",endColorstr="#ffffff",GradientType=1);
+  padding: 5% 0 5%; }
+
+/*
+.ii-proj-box {
+  width: 60%;
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+}*/
+/* line 340, mlba/static/styles/style.scss */
+.ii-bgimg-3 {
+  background-image: url("/static/styles?fd33ec6d03af");
+  text-align: center; }
+
+/* line 344, mlba/static/styles/style.scss */
+.txt-sketch {
+  margin-left: -1600px;
+  opacity: 0; }
+
+/* line 349, mlba/static/styles/style.scss */
+.ii-drawings {
+  padding-top: 2%;
+  opacity: 0; }
+
+/* line 353, mlba/static/styles/style.scss */
+.ii-drawings {
+  text-align: center; }
+
+/* line 358, mlba/static/styles/style.scss */
+.ii-bgimg-4 {
+  background-image: url("/static/styles?fd33ec6d03af");
+  background: #cb4e00; }
+
+/* line 363, mlba/static/styles/style.scss */
+.txt-plan {
+  margin-left: -1000px;
+  opacity: 0; }
+
+/* line 368, mlba/static/styles/style.scss */
+.ii-bgimg-5 {
+  background-image: url("/static/styles?fd33ec6d03af");
+  background: #316d90; }
+
+/* line 373, mlba/static/styles/style.scss */
+.ii-bgimg-6 {
+  background-image: url("/static/styles?fd33ec6d03af");
+  background: #a5b400; }
+
+/* line 377, mlba/static/styles/style.scss */
+.ii-img {
+  width: 10vw;
+  height: 10vw; }
+
+/* line 383, mlba/static/styles/style.scss */
+.ii-bgimg-7 {
+  background-image: url("/static/styles?fd33ec6d03af");
+  background: #b7579f; }
+
+/* line 390, mlba/static/styles/style.scss */
+#ii-anim-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: visible;
+  margin-top: 100px; }
+
+/* line 398, mlba/static/styles/style.scss */
+.ii-box {
+  background-size: cover;
+  background-position: center;
+  position: relative; }
+
+/* line 403, mlba/static/styles/style.scss */
+.ii-box:before {
+  padding-top: 100%;
+  content: "";
+  display: block; }

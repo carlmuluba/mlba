@@ -1,0 +1,17 @@
+# flyctl launch added from .gitignore
+**/db.sqlite3
+**/.idea
+**/*.pyc
+**/env-0
+**/env-back
+**/env.old
+**/Procfile
+**/api_key.json
+**/requeriments.old
+**/mlba/templates/base.back
+**/fly.toml.back
+
+# flyctl launch added from .idea/.gitignore
+# Default ignored files
+.idea/shelf
+.idea/workspace.xml

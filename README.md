@@ -1,5 +1,8 @@
 fuser -k -n tcp 8000
 
+# Local Db
+mlba;quase60anos
+
 ## Force Heroku deploy
 git push heroku HEAD:master
 
@@ -20,3 +23,6 @@ https://developer.mozilla.org/en-US/docs/Learn/Server-side/Django/Deployment
 https://cloud.google.com/python/django/appengine
 
 565422884778-rhhs5kn5bcf68rpdg5uc5l9hhb2ijg4d.apps.googleusercontent.com
+
+# ::: SOURCE
+source ../venv/bin/activate

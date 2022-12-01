@@ -1,0 +1,107 @@
+<link href='//fonts.googleapis.com/css?family=Signika+Negative:300,400,600' rel='stylesheet' type='text/css'>
+<div id="header"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/16327/logo-man.svg" width="100" style="vertical-align: middle; margin-right: 16px;" /><h1>Advanced staggers in GSAP 3</h1></div>
+<div id="container"></div>
+<div id="instructions">
+  <div id="controls">
+    <div class="control">
+      <div class="control-label">from:</div>
+      <div class="control-vertical">
+        <label for="center"><input type="radio" id="center" name="from" value="center" checked> <code>"center"</code></label>
+        <label for="end"><input type="radio" id="end" name="from" value="end"> <code>"end"</code></label>
+        <label for="edges"><input type="radio" id="edges" name="from" value="edges"> <code>"edges"</code></label>
+        <label for="random"><input type="radio" id="random" name="from" value="random"> <code>"random"</code></label>
+        <label for="index"><input type="radio" id="index" name="from" value="11"> <code id="fromIndex">11 (index)</code></label>
+      </div>
+    </div>
+    
+    <div class="control">
+      <div class="control-label">axis:</div>
+      <div class="control-vertical">
+        <label for="null"><input type="radio" id="null" name="axis" value="null" checked> <code>null</code> (both)</label>
+        <label for="x"><input type="radio" id="x" name="axis" value="x"> <code>"x"</code></label>
+        <label for="y"><input type="radio" id="y" name="axis" value="y"> <code>"y"</code></label>
+      </div>
+    </div>
+    
+    <div class="control">
+      <div class="control-label">ease:</div>
+      <div class="control-vertical">
+        <label for="linear"><input type="radio" id="linear" name="ease" value='"none"' checked> <code>"none"</code></label>
+        <label for='"easeInOut"'><input type="radio" id="easeInOut" name="ease" value='"power3.inOut"'> <code>"power3.inOut"</code></label>
+        <label for="easeOut"><input type="radio" id="easeOut" name="ease" value='"power2.in"'> <code>"power2.in"</code></label>
+      </div>
+    </div>
+    
+  </div>
+  <p>Play with the options above to see how it affects the animation and the code below. Click any box to have the stagger emanate outward from that specific index number, using the <code class="featured">from:[index]</code> syntax.</p>
+  <div class="code">
+    <code>gsap.to(".box", {</code><br>
+    <code>&nbsp;&nbsp;duration: 1,</code><br>
+    <code>&nbsp;&nbsp;scale: 0.1,</code><br>
+    <code>&nbsp;&nbsp;y: 40,</code><br>
+    <code>&nbsp;&nbsp;ease: "power1.inOut,</code><br>
+    <code class="featured">&nbsp;&nbsp;stagger: {</code><br>
+    <code class="featured">&nbsp;&nbsp;&nbsp;&nbsp;grid: [7,15],</code><br>
+    <code class="featured">&nbsp;&nbsp;&nbsp;&nbsp;from: <span id="from">"center"</span>,<br></code>
+    <code id="axisCode" class="featured" style="display:none;">&nbsp;&nbsp;&nbsp;&nbsp;axis: <span id="axis">null</span>,<br></code>
+    <code id="easeCode" class="featured" style="display:none;">&nbsp;&nbsp;&nbsp;&nbsp;ease: <span id="ease">Linear.easeNone</span>,<br></code>
+    <code class="featured">&nbsp;&nbsp;&nbsp;&nbsp;amount: 1.5</code><br>
+    <code class="featured">&nbsp;&nbsp;}</code><br>
+    <code>});</code>
+  </div>
+  
+  <h2>How does it work?</h2>
+  <p>All tweens recognize a <code class="featured">stagger</code> special property which can be an object, a number, or a function as described below:</p>
+    
+   
+  <h3>Object</h3>
+    <p>An object makes configuration simple. It may contain any of the following properties:</p> 
+<ul>
+  <li><strong>amount</strong> [number]: The total amount of time (in seconds) that gets split up among all the staggers. So if <code>amount</code> is <code>1</code> and there are 100 elements that stagger linearly, there would be 0.01 seconds between each tween's start time. If you prefer to specify a certain amount of time between each tween, use the <code>each</code> property <i>instead</i>. A negative <code>amount</code> will invert the timing effect which can be very handy. So <code>{amount:-1, from:"center"}</code> would cause staggers to go from the outer edges in toward the center.</li>
+  <li><strong>each</strong> [number]: The amount of time (in seconds) between each animation's start time. So if <code>each</code> is <code>1</code> (regardless of how many elements there are), there would be 1 second between each tween's start time. If you prefer to specify a <strong>total</strong> amount of time to split up among the staggers, use the <code>amount</code> property <i>instead</i>. A negative <code>each</code> will invert the timing effect which can be very handy. So <code>{each:-1, from:"center"}</code> would cause staggers to go from the outer edges in toward the center.</li>
+  <li><strong>from</strong> [string | integer]: The position in the array from which the stagger will emanate. To begin with a particular element, for example, use the number representing that element's index in the target array. So <code>from:4</code> begins staggering at the 5th element in the array (because arrays use zero-based indexes). The animation for each element will begin based on the element's proximity to the "from" value in the array (the closer it is, the sooner it'll begin). You can also use the following string values: <code>"start"</code>, <code>"center"</code>, <code>"edges"</code>, <code>"random"</code>, or <code>"end"</code> ("random" was added in version 3.1.0). Default: 0.</li>
+  <li><strong>grid</strong> [array | "auto"]: If the elements are being displayed in a grid visually, indicate how many rows and columns there are (like <code>grid:[9,15]</code>) so that GSAP can calculate proximities accordingly. Or use <code>grid:"auto"</code> to have GSAP automatically calculate the rows and columns using <code>element.getBoundingClientRect()</code> (great for responsive layouts). Grids are assumed to flow from top left to bottom right layout-wise (like text that wraps at the right edge). Or if your elements aren't arranged in a uniform grid, check out the <a href="https://codepen.io/GreenSock/pen/gyWrPO?editors=0010" target="_top">distributeByPosition() helper function</a> we created.</li>
+  <li><strong>axis</strong> [string]: If you define a <code>grid</code>, staggers are based on each element's total distance to the "from" value on both the x and y axis, but you can focus on just one axis if you prefer (<code>"x"</code> or <code>"y"</code>). Use the demo above to see the effect (it makes more sense when you see it visually).</li>
+  <li><strong>ease</strong> [Ease]: The ease that distributes the start times of the animation. So <code>"power2"</code> would start out with bigger gaps and then get more tightly clustered toward the end. Default: <code>"none"</code>.</li>
+  </ul>
+  
+  <h3>Number</h3>
+  <p>A value of <code>stagger: 0.1</code> would cause there to be 0.1 second between the start times of each tween. A negative value would do the same but backwards so that the last element begins first. We commonly call this a "simple" stagger.</p>
+  
+  <h3>Function</h3>
+  <p>The function is called once for each target/element in the array and should return the total delay from the starting position (not the amount of delay from the previous tween's start time). The function receives the following parameters:</p>
+  <ol>
+    <li><strong>index</strong> [integer] - The index value from the list</li>
+    <li><strong>target</strong> [object] - The target in the list at that index value</li>
+    <li><strong>list</strong> [array | NodeList] - The targets array (or NodeList)</li>
+  </ol>
+  
+  <h2>Repeat / Yoyo</h2>
+  <p>If you put your <code>repeat</code> in the top level of the vars object of your tween like <code>gsap.to(... {repeat:-1, stagger:{...})</code>, it waits for <strong>all</strong> of the sub-tweens to finish before repeating the <i>WHOLE</i> sequence, but if  you prefer to have each sub-tween repeat independently (so that as soon as each one completes, it immediately repeats itself), simply nest the <code>repeat</code> (and <code>yoyo</code> if necessary) <strong>inside</strong> the advanced stagger object, like <code>gsap.to(... {stagger:{repeat:-1, ...}});</code> Think of it almost like the advanced stagger object is a vars object for the sub-tweens.</p>
+  
+  
+  <h2>Video Explanation</h2>
+  <span class="fr-video"><iframe width="560" height="315" src="https://www.youtube.com/embed/wDnUtY5KcOc" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></span>
+  
+  
+  <h2>FAQ</h2>
+  <p>
+    <span class="question">Is this only useful for grids?</span>
+    Absolutely not! You can get some slick effects by leveraging <code>ease</code> to add more organic spacing, or use the <code>from</code> property to have things emanate outward from a specific element index or the <code>"center"</code>. Even just using <code>amount</code> can be useful because it gives you tight control over when all the staggering will finish regardless of how many elements are in the target array. 
+  </p>
+  
+  <p>
+    <span class="question">Does <code>grid: "auto"</code> work for responsive layouts after resize?</span>
+    No, stagger values get calculated immediately when the stagger method is called, so if the layout changes after that, you'd need to handle that logic on your own. For example, you could use a timeline's stagger method so that everything is in one instance, then have a resize listener that rewinds the timeline to its starting values, clears it, and then redoes the stagger. <code>timeline.time(0).clear(); timeline.to(...);</code> Ask in the <a href="https://greensock.com/forums/">forums</a> if you need any help with that. 
+  </p>
+  
+  <p>
+    <span class="question">What if my elements aren't in a uniform grid (gaps, different sizes, etc.) - can I stagger them based on position?</span>
+    Sure, that's the perfect time to use a function-based value. In fact, we've created a <a href="https://codepen.io/GreenSock/pen/gyWrPO?editors=0010" target="_top">distributeByPosition() helper function</a> for this very case that should make it crazy simple for you!.
+  </p>
+  
+  <p>
+    <span class="question">It's not working for me! Why not?</span>
+    Make sure you're loading <a href="https://greensock.com/?download=GSAP-JS">GSAP 3</a> or higher (you might need to empty your cache). Otherwise feel free to ask about your issue <a href="https://greensock.com/forums/">in the GreenSock forums</a>.
+  </p>
+</div>

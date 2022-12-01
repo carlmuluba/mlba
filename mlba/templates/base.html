@@ -6,12 +6,16 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{% block title %}MLB@ ::: is muluba ::::{% endblock title %}</title>
+  <link rel="apple-touch-icon" sizes="180x180" href="{% static 'images/mlba/favicon_io/apple-touch-icon.png' %}">
+  <link rel="icon" type="image/png" sizes="32x32" href="{% static 'images/mlba/favicon_io/favicon-32x32.png' %}">
+  <link rel="icon" type="image/png" sizes="16x16" href="{% static 'images/mlba/favicon_io/favicon-16x16.png' %}">
+  <link rel="manifest" href="{% static 'images/mlba/favicon_io/site.webmanifest' %}">
   {% block css %}
     {% font_awesome %}
     <link rel="stylesheet" href="{% static 'bulma/css/style.min.css' %}">
     {% block extra_css %}{% endblock extra_css %}
     {% compress css %}
-    <link type="text/x-scss" href="{% static 'style.scss' %}"  rel="stylesheet" media="screen">
+    <link type="text/x-scss" href="{% static 'styles/style.scss' %}"  rel="stylesheet" media="screen">
 {% endcompress %}
   {% endblock css %}
 </head>
@@ -58,7 +62,7 @@
             {% endif %}
 
   {% if request.path != '/' %}
-        <a role="button" class="navbar-burger" data-target="navMenuExample">
+        <a role="button" class="navbar-burger ii-nav-menu" data-target="navMenuExample">
           <span></span>
           <span></span>
           <span></span>

@@ -28,6 +28,7 @@ urlpatterns = [
                   path('', include('django.contrib.auth.urls')),
                   path('', include('mlba_site.urls')),
                   path('', include('mlba_app.urls')),
+                  path('', include('iionu.urls')),
 
               ] + static(settings.MEDIA_URL,
                          document_root=settings.MEDIA_URL)

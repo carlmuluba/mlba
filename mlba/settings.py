@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 from pathlib import Path
+from environs import Env
 import io
 import os
 
@@ -20,7 +21,6 @@ import environ
 import dj_database_url
 import cloudinary.api
 
-from google.cloud import secretmanager
 # adding config
 
 
@@ -30,59 +30,38 @@ cloudinary.config(
     api_secret="qDoZONYMx7joCFKKOMiRFNY2rTE"
 )
 
-# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
-env = environ.Env(DEBUG=(bool, False))
-env_file = os.path.join(BASE_DIR, ".env")
-
-if os.path.isfile(env_file):
-    # Use a local secret file, if provided
-
-    env.read_env(env_file)
-# ...
-elif os.environ.get("GOOGLE_CLOUD_PROJECT", None):
-    # Pull secrets from Secret Manager
-    project_id = os.environ.get("GOOGLE_CLOUD_PROJECT")
-
-    client = secretmanager.SecretManagerServiceClient()
-    settings_name = os.environ.get("SETTINGS_NAME", "django_settings")
-    name = f"projects/{project_id}/secrets/{settings_name}/versions/latest"
-    payload = client.access_secret_version(name=name).payload.data.decode("UTF-8")
-
-    env.read_env(io.StringIO(payload))
-else:
-    raise Exception("No local .env or GOOGLE_CLOUD_PROJECT detected. No secrets found.")
-
+env = Env()
+env.read_env()
 # ****
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-## -- BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-^r)eei^rj4_mh3^)oxb^7if&!_poymld0z2o6ux@r%lp0q5uzv'
+SECRET_KEY = env.str("SECRET_KEY") #'django-insecure-^r)eei^rj4_mh3^)oxb^7if&!_poymld0z2o6ux@r%lp0q5uzv'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-## -- DEBUG = True  # False
+DEBUG = env.bool("DEBUG", default=False)
 
-## -- CSRF_TRUSTED_ORIGINS = ['https://']
+CSRF_TRUSTED_ORIGINS = ['https://mlba-app.fly.dev', 'https://mlba.art', 'https://www.mlba.art']
 
 ALLOWED_HOSTS = [
-    '*'
-    # '127.0.0.1', 'www.mlba.art', 'mlba.herokuapp.com', '.herokuapp.com'
-    # '127.0.0.1',
-    # 'localhost',
-    # '1490-2001-818-eb29-8200-888-c365-9886-988.ngrok.io',
+    'localhost',
+    '127.0.0.1',
+    'mlba-app.fly.dev',
+    'www.mlba.art',
+    'mlba.art'
 ]
 
 # Application definition
 
 INSTALLED_APPS = [
-    'whitenoise.runserver_nostatic',
+    'whitenoise.runserver_nostatic',# new
     'mlba_app.apps.MlbaAppConfig',
     'mlba_site.apps.MlbaSiteConfig',
+    'iionu.apps.IionuConfig',
     'compressor',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -125,43 +104,21 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'mlba.wsgi.application'
 
-# Database
-# [START db_setup]
-# [START gaestd_py_django_database_config]
-# Use django-environ to parse the connection string
-DATABASES = {"default": env.db()}
-
-# If the flag as been set, configure to use proxy
-if os.getenv("USE_CLOUD_SQL_AUTH_PROXY", None):
-    DATABASES["default"]["HOST"] = "127.0.0.1"
-    DATABASES["default"]["PORT"] = 5432
-
-# [END gaestd_py_django_database_config]
-# [END db_setup]
-
-# Use a in-memory sqlite3 database when testing in CI systems
-# TODO(glasnt) CHECK IF THIS IS REQUIRED because we're setting a val above
-if os.getenv("TRAMPOLINE_CI", None):
-    DATABASES = {
-        "default": {
-            "ENGINE": "django.db.backends.sqlite3",
-            "NAME": os.path.join(BASE_DIR, "db.sqlite3"),
-        }
-    }
     
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#         'NAME': 'mlba_data',
-#         'USER': 'dasilva',
-#         'PASSWORD': 'kissua',
-#         'HOST': 'localhost',
-#         'PORT': '',
-#     }
-# }
+DATABASES = {
+    'default': env.dj_db_url("DATABASE_URL", default="sqlite:/db.sqlite3"),
+    #'default': {
+    #    'ENGINE': 'django.db.backends.postgresql_psycopg2',
+    #    'NAME': 'mlba_db',
+    #    'USER': 'dev',
+    #    'PASSWORD': 'quase60anos',
+    #    'HOST': 'localhost',
+    #    'PORT': '',
+    #}
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
@@ -206,14 +163,17 @@ STATICFILES_FINDERS = (
 COMPRESS_PRECOMPILERS = (
     ('text/x-scss', 'django_libsass.SassCompiler'),
 )
-
 STATIC_URL = '/static/'
-# STATICFILES_DIRS = [os.path.join(BASE_DIR, 'mlba/static'), ]
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'mlba/static')
+### STATIC_URL = '/static/'
+
+
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'mlba/static'), ]
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 # Base url to serve media files
-MEDIA_URL = 'media/'
+MEDIA_URL = '/media/'
 
 # Path where media is stored
 MEDIA_ROOT = os.path.join(BASE_DIR, 'mlba/media')
@@ -225,8 +185,8 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'mlba/media')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Heroku: Update database configuration from $DATABASE_URL.
-db_from_env = dj_database_url.config(conn_max_age=500)
-DATABASES['default'].update(db_from_env)
+## db_from_env = dj_database_url.config(conn_max_age=500)
+## DATABASES['default'].update(db_from_env)
 # Simplified static file serving.
 # https://pypi.org/project/whitenoise/
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'

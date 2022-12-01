@@ -1,0 +1,121 @@
+<!--!DOCTYPE html-->
+<html lang="en">
+{% load static bulma_tags %}
+{% load compress %}
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}iiONu ::: Collectibles ::::{% endblock title %}</title>
+  <!--link rel="shortcut icon" type="image/png" href="{ static 'images/iionu/favicon_io/favicon.ico' }"/-->
+  <link rel="apple-touch-icon" sizes="180x180" href="{% static 'images/iionu/favicon_io/apple-touch-icon.png' %}">
+  <link rel="icon" type="image/png" sizes="32x32" href="{% static 'images/iionu/favicon_io/favicon-32x32.png' %}">
+  <link rel="icon" type="image/png" sizes="16x16" href="{% static 'images/iionu/favicon_io/favicon-16x16.png' %}">
+  <link rel="manifest" href="{% static 'images/iionu/favicon_io/site.webmanifest' %}">
+  {% block css %}
+    {% font_awesome %}
+    <link rel="stylesheet" href="{% static 'bulma/css/style.min.css' %}">
+   <!-- { block extra_css }{ endblock extra_css } --> 
+    {% compress css %}
+    <link type="text/x-scss" href="{% static 'styles/style.scss' %}"  rel="stylesheet" media="screen">
+{% endcompress %}
+  {% endblock css %}
+  
+</head>
+
+<body class="has-background-black-ter has-text-white-ter" >
+
+{% load static %}
+ 
+{% block header %}
+  <!--div class="container"-->
+    <nav class="navbar is-transparent">
+      <div class="navbar-brand" style="min-height: 26px; padding-top: 1rem;">
+          <!--h2 class="is-size-1" style="color: #f5f5f5;">MLB@</h2-->
+    <a class="" href="/" style="height: 60px; width: 160px; padding-left: 1.5rem;">
+      <img src="/static/images/MLBa-logo.png" width="125" height="">
+    </a> <!-- 
+        <a class="navbar-item" href="https://twitter.com/muluba" target="_blank">
+        <span class="icon is-large" style="color: #55acee;">
+          <i class="fab fa-twitter"></i>
+        </span>
+        </a>
+
+        <a class="navbar-item" href="https://instagram.com/c_muluba" target="_blank">
+        <span class="icon is-large" style="color: #f5f5f5;">
+          <i class="fab fa-instagram"></i>
+        </span>
+        </a> -->
+        <a role="button" class="navbar-burger" data-target="navMenuExample" style="z-index: 9999;">
+          <span></span>
+          <span></span>
+          <span></span>
+        </a>
+      </div>
+      <div id="navMenuExample" class="navbar-menu ii-nav-menu" style="padding-top: 1.5rem;">
+          <div class="navbar-start">
+          </div>
+        <div class="navbar-end ii-nav-end">
+            <!-- ::: iiONu :::: -->
+            <a id="ii" class="navbar-item  is-active is-uppercase">
+                iiONu
+            </a>
+            <!-- ::: About :::: -->
+            <a id="ii" class="navbar-item is-active is-uppercase" href="/iionu/#about">
+              About
+            </a>
+            <!-- ::: Team :::: -->
+            <a id="ii" class="navbar-item  is-active is-uppercase" href="/iionu/#actionplan">
+              Action Plan
+            </a>
+            <!-- ::: Feed :::: -->
+            <!--a id="ii" class="navbar-item  is-active is-uppercase" href="/iionu/#youplay">
+              You Play
+            </a-->
+            <!-- ::: Team :::: -->
+            <a id="ii" class="navbar-item is-active is-uppercase" href="/iionu/#team">
+              The Team
+            </a>
+          </div>
+      </div>
+  </nav>
+{% endblock header %}
+
+{% block hero %}{% endblock hero %}
+
+
+
+    {% block content_area %}
+      {% block content_title %}{% endblock content_title %}
+      {% block content %}{% endblock content %}
+    {% endblock content_area %}
+  </div>
+</section>
+
+{% block footer %}
+  <footer class="footer has-text-white-ter is-transparent" style="background-color: transparent;">
+    <div class="container">
+      <div class="content has-text-centered">
+        <p>
+          <strong>MLB@</strong> is <a href="/">c muluba</a>. "The more I learn, the more I realize how much I don't know." <span> ― Albert Einstein</span>
+        </p>
+        <!--p>
+          <a class="icon" href="https://github.com/jgthms/bulma">
+            <i class="fab fa-github"></i>
+          </a>
+        </p-->
+      </div>
+    </div>
+  </footer>
+{% endblock footer %}
+
+{% block javascript %}
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.3/gsap.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.3/EasePack.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.3/ScrollTrigger.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js" ></script>
+<script type="text/javascript" src="{% static 'script.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/iionu/iionu.js' %}"></script>
+  {% block extra_javascript %}{% endblock extra_javascript %}
+{% endblock javascript %}
+</body>
+</html>

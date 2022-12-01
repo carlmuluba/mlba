@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Get all "navbar-burger" elements
   const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+  const $navbarItems = document.querySelectorAll('.navbar-item');
 
   // Add a click event on each of them
   $navbarBurgers.forEach( el => {
@@ -14,6 +15,18 @@ document.addEventListener('DOMContentLoaded', () => {
       // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
       el.classList.toggle('is-active');
       $target.classList.toggle('is-active');
+
+    });
+  });
+  // Add a click event on each of them
+  $navbarItems.forEach( el => {
+    el.addEventListener('click', () => {
+  
+      var $newtarget = document.querySelector(".navbar-menu");
+      var $othertarget = document.querySelector(".navbar-burger");
+    // el.classList.toggle('is-active');
+     $newtarget.classList.toggle('is-active');
+     $othertarget.classList.toggle('is-active');
 
     });
   });
